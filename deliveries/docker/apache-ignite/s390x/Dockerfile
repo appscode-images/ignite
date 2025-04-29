@@ -60,6 +60,9 @@ COPY run.sh ${IGNITE_HOME}/
 # Grant permission to copy optional libs
 RUN chmod -R 777 ${IGNITE_HOME}/libs ${IGNITE_HOME}
 
+# Grant permission to write query history
+RUN chmod 777 ${IGNITE_HOME}/bin
+
 # Grant permission to execute entry point
 RUN chmod 555 ${IGNITE_HOME}/run.sh
 

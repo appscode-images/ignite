@@ -35,6 +35,9 @@ RUN chmod 777 ${IGNITE_HOME}/libs
 # Grant permission to create work directory
 RUN chmod 777 ${IGNITE_HOME}
 
+# Grant permission to write query history
+RUN chmod 777 ${IGNITE_HOME}/bin
+
 # Grant permission to execute entry point
 RUN chmod 555 $IGNITE_HOME/run.sh
 
