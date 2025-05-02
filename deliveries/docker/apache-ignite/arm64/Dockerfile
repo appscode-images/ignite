@@ -15,9 +15,9 @@
 # limitations under the License.
 #
 
-# Start from Java 8 based on Ubuntu Focal Linux image (there is no Alpine Linux image with Java 8 on ARM64)
-ARG JDK_VERSION=8
-FROM eclipse-temurin:${JDK_VERSION}-jre-focal
+# Start from Java 11 based on RedHat UBI Linux image
+ARG JDK_VERSION=11
+FROM eclipse-temurin:${JDK_VERSION}-jre-ubi9-minimal
 
 # Settings
 ENV IGNITE_HOME /opt/ignite/apache-ignite
@@ -40,6 +40,11 @@ RUN chmod 555 $IGNITE_HOME/run.sh
 
 # Entry point
 CMD $IGNITE_HOME/run.sh
+
+# Use non-root ignite user
+RUN groupadd -g 70 ignite \
+ && useradd -u 70 -g ignite -m -s /bin/bash ignite
+USER 70
 
 # Container port exposure
 EXPOSE 11211 47100 47500 49112 10800 8080
